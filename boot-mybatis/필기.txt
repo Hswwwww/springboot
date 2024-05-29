@@ -1,0 +1,19 @@
+
+
+
+2. DB Connection 설정 > HijariCP 설정
+    - JDBC, MyBatis, JPA 등 모든 DB작업 공통 설정
+    - application.yml
+    - 스프링 부트 > HikariCP를 기본으로 사용(+설정)
+    - src/test/java > com.test.bootmybatis > "ConnectionTests.java"
+
+2.1 application.yml
+    - 동시에 딱 1개의 DB만 연결이 가능
+2.2 "com.test.bootmybatis.config" > "DataBaseConfiguration.java"
+    - 다중 연결
+
+3. 파일 생성
+- "com.test.bootmybatis.controller" > "MyBatisController.java"
+- "com.test.bootmybatis.mapper" > "AddressMapper.java"(I)
+- src/main/resource > "com" > "test" > "bootmybatis" > "mapper" > "AddressMapper.xml"
+  - src/test/java > com.test.bootmybatis > "MapperTests.java"
