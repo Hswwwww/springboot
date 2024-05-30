@@ -20,6 +20,14 @@
         select * from tblAddress where rownum =1
     </select>
 
+    <select id="name" resultType="String">
+        select name from tblAddress
+    </select>
+
+    <select id="list" resultType="com.test.bootthymeleaf.dto.AddressDTO">
+        select * from tblAddress
+    </select>
+
 </mapper>
 
 
