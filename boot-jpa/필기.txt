@@ -1,0 +1,14 @@
+
+ORM
+- 관계형 데이터베이스 데이터 <-> 객체 지향 프로그래밍 데이터
+
+
+테스트
+- "com.test.bootjpa.entity" > "Address.java"
+- "com.test.bootjap.repository" > "AddressRepository.java"
+
+- src/test/java > com.test.bootjpa > "AddressRepositoryTests.java"
+
+파일 생성
+- "com.test.bootjpa.controller" > "AddressController.java"
+- "com.test.bootjpa.dto" > "AddressDTO.java"
