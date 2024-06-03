@@ -496,7 +496,7 @@ insert into tblMemo values (97, '무슨 책을 읽고 있어? 허허~', sysdate 
 insert into tblMemo values (98, '나중에 뭐 할 거야? 강아지 울음소리~', sysdate - 1.51239, 38);
 insert into tblMemo values (99, '키보드 배송중!!', sysdate - 1.4314, 9);
 insert into tblMemo values (100, '최근에 들은 소식 있어? 콩콩~', sysdate, 1);
-
+       
 
 
 commit;
@@ -511,3 +511,6 @@ desc address;
 drop  table address;
 drop  table hte_address;
 
+select * from tblAddress;
+delete from tblAddress where seq = 59;
+commit;
