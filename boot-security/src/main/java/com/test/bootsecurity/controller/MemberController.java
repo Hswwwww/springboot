@@ -31,4 +31,11 @@ public class MemberController {
         return "redirect:/login";
     }
 
+    @GetMapping(value="/my")
+    public String my(){
+        //회원만
+
+        return "my";
+    }
+
 }

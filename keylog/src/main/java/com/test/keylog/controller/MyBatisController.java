@@ -24,9 +24,10 @@ public class MyBatisController {
 
     @GetMapping(value="/index.do")
     public String m01(Model model ) {
-        List<BoardDTO> boardlist =  addressMapper.view();
+        List<BoardDTO> boardList =  addressMapper.view();
 
-        model.addAttribute("boardlist", boardlist);
+        model.addAttribute("boardList", boardList);
+
         return "index";
     }
 

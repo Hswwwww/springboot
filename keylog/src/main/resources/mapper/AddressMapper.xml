@@ -7,6 +7,9 @@
     <select id="time" resultType="String">
         select sysdate from dual
     </select>
+    <select id="view" resultType="com.test.keylog.dto.BoardDTO">
+        SELECT * FROM tblBoard
+    </select>
 
 </mapper>
 

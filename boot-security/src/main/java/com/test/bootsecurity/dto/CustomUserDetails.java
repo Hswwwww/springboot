@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//인증 사용자 정보가 들어있는 객체
+//인증 사용자 정보가 들어있는 객체 (DTO역할)
 //- 구현 메서드 > 개인 관련 정보 제공 역할
 public class CustomUserDetails implements UserDetails {
 

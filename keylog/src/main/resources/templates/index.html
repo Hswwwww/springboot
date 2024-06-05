@@ -30,13 +30,13 @@
             <th>등록날짜</th>
 
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr th:each="board : ${boardList}">
+            <td th:text="${board.username}"></td>
+            <td th:text="${board.title}"></td>
+            <td th:text="${board.content}"></td>
+            <td th:text="${board.likeCount}"></td>
+            <td th:text="${board.commentCount}"></td>
+            <td th:text="${board.regDate}"></td>
         </tr>
     </table>
 
