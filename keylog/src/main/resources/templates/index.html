@@ -15,6 +15,7 @@
         <h1>keylog</h1>
     <ul>
         <li><a href="/tiles/admin/log.do">로그인</a></li>
+        <li><a href="/mypage.do">마이페이지</a></li>
     </ul>
     </header>
 
@@ -31,12 +32,12 @@
 
         </tr>
         <tr th:each="board : ${boardList}">
-            <td th:text="${board.username}"></td>
+            <td th:text="${board.userid}"></td>
             <td th:text="${board.title}"></td>
             <td th:text="${board.content}"></td>
-            <td th:text="${board.likeCount}"></td>
-            <td th:text="${board.commentCount}"></td>
-            <td th:text="${board.regDate}"></td>
+            <td th:text="${board.likeCnt}"></td>
+            <td th:text="${board.scrapCnt}"></td>
+            <td th:text="${board.regdate}"></td>
         </tr>
     </table>
 

@@ -11,6 +11,10 @@
         SELECT * FROM tblBoard
     </select>
 
+    <select id="mypage" parameterType="String" resultType="com.test.keylog.dto.UserDTO">
+        select * from tblUser where id= #{id}
+    </select>
+
 </mapper>
 
 

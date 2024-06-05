@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://pinnpublic.dothome.co.kr/cdn/example-min.css">
+</head>
+<body>
+
+<header>
+    <h1>keylog</h1>
+    <ul>
+        <li><a href="/tiles/admin/log.do">로그인</a></li>
+        <li><a href="/mypage.do">마이페이지</a></li>
+    </ul>
+</header>
+
+<h1>마이페이지</h1>
+
+<table>
+    <tr>
+        <th>이름</th>
+        <th>닉네임</th>
+        <th>번호</th>
+
+
+    </tr>
+    <tr>
+        <td th:text="${mypage.name}"></td>
+        <td th:text="${mypage.nickname}"></td>
+        <td th:text="${mypage.tel}"></td>
+
+
+    </tr>
+</table>
+
+
+</body>
+</html>
+
+
+
+
+

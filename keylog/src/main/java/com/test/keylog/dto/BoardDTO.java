@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class BoardDTO {
     private String id;
+    private String userid;
     private String content;
     private String title;
     private String regdate;
