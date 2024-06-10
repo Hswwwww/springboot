@@ -22,5 +22,11 @@ spring:
             hibernate:
                 format_sql: true #이쁘게
 
+    # 암호화 키
+    jwt:
+        secret: cf2a2baa65bac5f14806895c5390d44e366c73ffe580f27a1f2228373f7eeec7   #Sha256
+
+
+
 server:
     port: 8090

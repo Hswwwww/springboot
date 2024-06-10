@@ -1,5 +1,6 @@
 package com.test.jwt.auth;
 
+import com.test.jwt.dto.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,14 +10,19 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager; // 있는거 가져다 쓰면 됨
+    private final JWTUtil jwtUtil;
 
     //ALT+ INSERT > GENERAGE
 
@@ -42,6 +48,32 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         //로그인 성공 > 메소드 호출
         System.out.println(">>>>>>>>>>>>>>> Login Success");
+
+        //JWT 발급
+        //- 인증 받은 유저의 정보 > username, role, 만료시간 >  JWT 발급
+        CustomUserDetails customUserDetails = (CustomUserDetails)authResult.getPrincipal();
+
+        String username = customUserDetails.getUsername();
+        Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
+        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
+        GrantedAuthority auth = iterator.next();
+        String role = auth.getAuthority(); //ROLE_MEMBER, ROLE_ADMIN일케 들어있음
+
+
+        String token = jwtUtil.createJwt(username, role, 1000*60*10L);
+
+        //HTTP 헤더 필수 > RFC 7235 인증 규약
+        //- Authorization 키
+        //- Bearer 접두어 + 인증 토큰
+        response.addHeader("Authorization", "Bearer " + token);
+
+
+
+
+        
+
+
+
 
     }
 

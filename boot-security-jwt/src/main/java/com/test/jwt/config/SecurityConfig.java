@@ -1,5 +1,7 @@
 package com.test.jwt.config;
 
+import com.test.jwt.auth.JWTFilter;
+import com.test.jwt.auth.JWTUtil;
 import com.test.jwt.auth.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Controller;
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil;
 
 
     @Bean
@@ -56,8 +59,12 @@ public class SecurityConfig {
         // 기본형 : http.addFilter(new LoginFilter(), UsernamePasswordAuthenticationFilter.class);
         //LoginFilter 등록
         //http.addFilter(new LoginFilter(), UsernamePasswordAuthenticationFilter.class);
-        http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+
+        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil), UsernamePasswordAuthenticationFilter.class);
+
+        //JWT 필터 등록
+        http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class); //로그인 필터보다 먼저 실행
 
 
 
@@ -72,8 +79,13 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
+
         return configuration.getAuthenticationManager();
+
+
     }
+
+
 }
 
 
