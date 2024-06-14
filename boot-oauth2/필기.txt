@@ -1,0 +1,176 @@
+
+Spring OAuth2 Client
+
+
+OAuth 2.0
+- 인증 프로토콜
+- 제 3자 애플리케이션(네이버, 구글, 카카오 등)이 사용자를 대신해서 HTTP 서비스를 이용할 수 있는 권한을 부여하는 기능을 제공한다.
+
+
+
+
+1. 새 프로젝트
+- name > "boot-oauth2"
+- Language > java
+- Type > Gradle - Groovy
+- Group > "com.test"
+- Artifact > "boot-oauth2"
+- Package name > "com.test.oauth2"
+- JDK > 17
+- Packaging > Jar
+- 의존성
+    - Spring Web
+    - Lombok
+    - Thymeleaf
+    - Spring Security
+    - OAuth2 Client
+    - Spring Data JPA
+    - Oracle Driver
+
+
+
+2. 데이터베이스 의존성 주석
+- build.gradle
+
+
+
+
+3. 파일 생성
+- "com.test.oauth2.controller" > "MainController.java"
+                               > "MyController.java"
+- templates > "index.html"
+            > "my.html"
+- templates > "inc" > "header.html"
+
+
+
+
+
+4. 시큐리티 설정
+- "com.test.oauth2.config" > "SecurityConfig.java"
+
+
+
+
++---------------+                                         +---------------------+
+|               |                                         |                     |
+|    Client     |                                         |   Authorization     |
+| (Web/Mobile)  |                                         |      Server         |
+|               |                                         |  (Auth Provider)    |
++-------+-------+                                         +---------+-----------+
+        |                                                             |
+        |  1. Authorization Request (Authorization Code Grant)       |
+        |------------------------------------------------------------>|
+        |                                                             |
+        |                                                             |
+        |  2. Authorization Response (Authorization Code)            |
+        |<------------------------------------------------------------|
+        |                                                             |
+        |  3. Token Request (Authorization Code)                     |
+        |------------------------------------------------------------>|
+        |                                                             |
+        |                                                             |
+        |  4. Token Response (Access Token)                          |
+        |<------------------------------------------------------------|
+        |                                                             |
+        |                                                             |
+        |                                                             |
+        |    +---------------+                                        |
+        |    |               |                                        |
+        |    | Resource      |                                        |
+        |    | Server        |                                        |
+        |    | (API Server)  |                                        |
+        |    +-------+-------+                                        |
+        |            |                                                |
+        |            |  5. Resource Request (Access Token)            |
+        |            |----------------------------------------------->|
+        |            |                                                |
+        |            |                                                |
+        |            |  6. Resource Response                          |
+        |            |<-----------------------------------------------|
+        |            |                                                |
+        +------------+                                                |
+                                                                      |
+                                                                      |
+                                                                      |
++---------------+                                         +-----------+-----------+
+|               |                                         |                       |
+|     User      |                                         |                       |
+|               |                                         |                       |
++---------------+                                         +-----------------------+
+
+
+
+
+
+인증 필터가 동작하는 주소(관습)
+
+- 처음 요청하는 로그인 시도 URL
+    - OAuth2AuthorizationRequestRedirectFilter
+        - /oauth2/authorization/서비스명
+        - /oauth2/authorization/naver
+        - /oauth2/authorization/google
+
+- 인증 서버 > 코드를 반환받아 돌아오는 URL
+    - OAuth2LoginAuthenticationFilter
+        - /login/oauth2/code/서비스명
+        - /login/oauth2/code/naver
+        - /login/oauth2/code/google
+
+
+
+5. 소셜 로그인 > 변수 설정
+- application.yml
+
+
+
+
+
+6. 네이버 소셜 로그인 신청
+- 네이버 개발자 센터 > Products > 네이버 로그인 API > 오픈 API 이용 신청
+
+
+
+7. 구글 소셜 로그인 신청
+- https://console.cloud.google.com/?hl=ko
+
+
+
+8. OAuth2UserService 응답 받기
+- 인증 토큰 받은 뒤 리소스 서버로부터 개인 정보를 받는다.
+- "com.test.oauth2.service" > "CustomOAuth2UserService.java"
+
+- "com.test.oauth2.dto"
+    > "Oauth2Response.java"(I)
+        > "NaverResponse.java"(C)
+        > "GoogleResponse.java"(C)
+
+
+
+
+9. 로그인 완료 처리
+- com.test.oauth2.dto > "UserDTO.java"
+                      > "CustomOAuth2User.java"
+
+
+10. 유저 정보 > DB 저장
+- "com.test.oauth2.entity" > "UserEntity.java"
+- "com.test.oauth2.repository" > "UserRepository.java"
+
+1	pinn.public@gmail.com	ROLE_USER	google 103086981924944327104
+2	syncfile@naver.com	ROLE_USER	naver XOxiD-BaTuM_idp9fLGQJi2f8GhvPqEf3yHa3Z_nJNo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
