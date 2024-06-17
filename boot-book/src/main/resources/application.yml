@@ -1,4 +1,5 @@
 spring:
+<<<<<<< HEAD
   application:
     name: boot-book
 
@@ -46,3 +47,10 @@ server:
 
 
 
+=======
+    application:
+        name: boot-book
+
+server:
+    port: 8090
+>>>>>>> 2193909455fad3a1449c7e3e2ba6344ef9d5a538
