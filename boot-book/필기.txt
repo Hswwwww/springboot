@@ -1,0 +1,66 @@
+
+Spring Boot + JPA + Elasticsearch
+
+
+
+설정
+
+- boot-book > "script.sql"
+
+- "com.test.book.controller" > "BookController.java"
+- "com.test.book.service" > "BookService.java"
+- "com.test.book.dto" > "BookDTO.java"
+- "com.test.book.repository" > "BookRepository.java"(I)
+- "com.test.book.repository" > "ElasticsearchRepository.java"
+- "com.test.book.entity" > "Book.java"
+
+- templates > "list.html"
+            > "view.html"
+            > "add.html"
+            > "inc" > "header.html"
+
+
+
+업무 구현
+1. 스프링 부트 + JPA > CRUD
+2. 엘라스틱서치 > 검색
+    2.1 프로젝트 구동 전 > 오라클 데이터를 엘라스틱서치에 복사한다. (처음 1회만)
+    2.2 목록보기 > 변화없음
+    2.3 추가하기 > 기존 업무(DB Insert) + 엘라스틱서치(Document 추가)
+    2.4 상세보기 > 변화없음
+    2.5 검색하기 > 엘라스틱서치(Document 조회)
+
+3. 인덱스 생성하기 > book
+    - 제목(title) > 검색 대상
+    - 가격(discount), 저자(author), 출판사(publisher), 표지(image) > 출력용
+    - 번호(seq) > PK
+
+logstash
+어딘가에 있는 데이터 집합을 엘라스틱 서치로 데이터를 전달해주는 역할
+mysql > ms-sql 도 가능 꼭 엘라스틱 서치 용 프로그램은 아님..
+config 설정 해야함.!
+
+4. logstash
+    - DB > (복사) > Elasticsearch
+    - $ logstash.bat -f book.config
+
+5. 검색 구현
+    - /list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
